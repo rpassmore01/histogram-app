@@ -10,8 +10,7 @@ class Upload extends React.Component {
       file: null,
       redValues: [],
       blueValues: [],
-      greenValues: [],
-      alphaValues: []
+      greenValues: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.updateValue = this.updateValue.bind(this)
@@ -46,7 +45,7 @@ class Upload extends React.Component {
     var bins = histogram(this.state.redValues);
 
     var svg = d3
-      .select("body")
+      .select(".svg-div")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -93,7 +92,6 @@ class Upload extends React.Component {
       let localredValues = [];
       let localgreenValues = [];
       let localblueValues = [];
-      let locala
       for (let i = 0; i < img.bitmap.width; i++){
         for (let j = 0; j < img.bitmap.height; j++){
           let hex = img.getPixelColor(i, j);
@@ -101,7 +99,6 @@ class Upload extends React.Component {
           localredValues.push(RGBA.r)
           localgreenValues.push(RGBA.g)
           localblueValues.push(RGBA.b)
-          lo
         }
       }
       this.setState({
@@ -117,9 +114,14 @@ class Upload extends React.Component {
     return (
       <div>
         <input type="file" onChange={this.handleChange} />
-        <div className="img-div">
-          <img src={this.state.file} />
-        </div>
+        <div className="photo-graph-div">
+          <div className="img-div">
+            <img src={this.state.file} />
+          </div>
+
+          <div className="svg-div"></div>
+
+        </div> 
       </div>
     );
   }

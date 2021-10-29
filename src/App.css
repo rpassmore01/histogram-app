@@ -1,9 +1,14 @@
-.test {
-  background-color: lightgray;
-  height: 50px;
-  width: 200px;
+.img-div {
+  padding: 1rem;
 }
 
-.img-div {
-  background-color: lightgray;
+.img-div img {
+  width: 35rem;
+  height: auto;
+}
+
+.photo-graph-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
