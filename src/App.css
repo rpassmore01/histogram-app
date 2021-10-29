@@ -12,3 +12,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+@media only screen and (max-width: 1000px) {
+  .photo-graph-div {
+    flex-direction: column;
+  }
+}

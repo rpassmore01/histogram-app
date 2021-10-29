@@ -85,6 +85,21 @@ class Upload extends React.Component {
         return height - y(d.length);
       })
       .style("fill", "red");
+
+      svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height)
+        .text("Pixel Value 0-255");
+
+    svg.append("text")
+      .attr("class", "y label")
+      .attr("text-anchor", "end")
+      .attr("y", 6)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .text("Pixel Count");
     
   }
   updateValue() {
