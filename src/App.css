@@ -1,5 +1,8 @@
 .img-div {
   padding: 1rem;
+  background-color: lightgray;
+  border-radius: 5px;
+  margin-top: 1rem;
 }
 
 .img-div img {
@@ -16,5 +19,12 @@
 @media only screen and (max-width: 1000px) {
   .photo-graph-div {
     flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .img-div img {
+    width: 20rem;
+    height: auto;
   }
 }
