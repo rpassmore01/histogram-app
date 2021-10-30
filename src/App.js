@@ -11,18 +11,22 @@ class Upload extends React.Component {
       redValues: [],
       blueValues: [],
       greenValues: [],
-      imgCounter: 1
+      imgCounter: 0
     }
     this.handleChange = this.handleChange.bind(this)
     this.updateValue = this.updateValue.bind(this)
     this.drawChart = this.drawChart.bind(this)
+    this.resetSvg = this.resetSvg.bind(this)
   }
   handleChange(event) {
 
     if(event.target.files[0] != null){
-      this.setState({
-        file: URL.createObjectURL(event.target.files[0])
-      }, () => {this.updateValue();})
+      this.setState((state) => (
+        {
+          imgCounter: state.imgCounter + 1,
+          file: URL.createObjectURL(event.target.files[0])
+        }
+      ), () => {this.updateValue();})
     }
   }
   drawChart() {
@@ -37,7 +41,7 @@ class Upload extends React.Component {
     var svg = d3.select(".svg-div")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
@@ -52,7 +56,7 @@ class Upload extends React.Component {
     
     var histogram = d3.histogram()
       .domain(x.domain())
-      .thresholds(x.ticks(255));
+      .thresholds(x.ticks(256));
     
     var redBins = histogram(this.state.redValues);
     var blueBins = histogram(this.state.blueValues);
@@ -170,13 +174,19 @@ class Upload extends React.Component {
       this.drawChart();
     })
   }
+
+  resetSvg() {
+    window.location.reload();
+  }
   
   render() {
     return (
-      <div>
+      <div className="main-div">
         <h1>Histogram Web App</h1>
         <p>Upload a photo to see a histogram for the image, or upload multiple to compare histograms.</p>
-        <input type="file" onChange={this.handleChange} />
+        <input type="file" onChange={this.handleChange} id="file-input" className="file"/>
+        <label for="file-input">Select file</label>
+        <button onClick={this.resetSvg} className="reset-btn">Reset</button>
         <div className="photo-graph-div">
           <div className="img-div">
             {this.state.file == null ? <p>No Image Uploaded</p> :  <img src={this.state.file} />}
